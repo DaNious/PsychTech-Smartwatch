@@ -6,15 +6,14 @@ from datetime import datetime
 import os
 import matplotlib.pyplot as plt
 
-from serverMsg import serverMsg
+from ServerMsg import ServerMsg
+from RawData3D import RawData3D
 
 HOST = '39.107.248.79'
 
 PORT = 1883
 
-rawData = []
-plt.ion()
-plt.show()
+rawAccData = RawData3D("Acc")
 
 # On_connect callback
 def on_connect(client, userdata, flags, rc):
@@ -22,15 +21,11 @@ def on_connect(client, userdata, flags, rc):
 # On_message callback
 def on_message(client, userdata, msg):
     global dataCnt
-    dataMsg = serverMsg(msg.topic, msg.payload)
+    dataMsg = ServerMsg(msg.topic, msg.payload)
     data = dataMsg.fetchData()
-    ## save to local variable(s) ##
-    rawData.extend(dataMsg.data2float(data))
-    # plot
-    y = rawData
-    x = range(len(y))
-    plt.scatter(x, y, c = 'b')
-    plt.pause(0.05)
+    ## save to local variable(s) and plot ##
+    rawAccData.addData(dataMsg.data2float(data))
+    rawAccData.plotData()
     ## save to local file(s) ##
     currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
     if not os.path.exists("data/"+currentDateTime):

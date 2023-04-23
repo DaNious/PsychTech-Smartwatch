@@ -1,4 +1,4 @@
-class serverMsg:
+class ServerMsg:
     def __init__(self, topic, payload):
         self.topic = topic
         self.payload = payload.decode("utf-8")
