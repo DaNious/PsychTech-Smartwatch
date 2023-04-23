@@ -1,2 +1,9 @@
+# no Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
 # no csv file
 *.csv
+
+# no data folder
+data/
