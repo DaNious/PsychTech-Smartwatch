@@ -16,7 +16,7 @@ def on_message(client, userdata, msg):
     msgModal = msg.topic
     dataStr = msgStr[msgStr.find("[")+1:msgStr.find("]")]
     dataList = list(dataStr.split(","))
-    file = open(msgModal[msgModal.rfind("/")+1:]+".csv", "w")
+    file = open(msgModal[msgModal.rfind("/")+1:]+"_data.csv", "a")
     # csv_writer = csv.writer(file, delimiter=",")
     for data in dataList:
         if data != "":
