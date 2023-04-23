@@ -4,6 +4,7 @@ import time
 import csv
 from datetime import datetime
 import os
+import matplotlib.pyplot as plt
 
 from serverMsg import serverMsg
 
@@ -11,14 +12,26 @@ HOST = '39.107.248.79'
 
 PORT = 1883
 
+rawData = []
+plt.ion()
+plt.show()
+
 # On_connect callback
 def on_connect(client, userdata, flags, rc):
     print('Connected with result code '+str(rc))
 # On_message callback
 def on_message(client, userdata, msg):
+    global dataCnt
     dataMsg = serverMsg(msg.topic, msg.payload)
     data = dataMsg.fetchData()
-    # save to a local file
+    ## save to local variable(s) ##
+    rawData.extend(dataMsg.data2float(data))
+    # plot
+    y = rawData
+    x = range(len(y))
+    plt.scatter(x, y, c = 'b')
+    plt.pause(0.05)
+    ## save to local file(s) ##
     currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
     if not os.path.exists("data/"+currentDateTime):
         os.makedirs("data/"+currentDateTime)
@@ -33,14 +46,15 @@ client.on_message = on_message
 # Establish connection
 client.connect(HOST, PORT, 60)
 
-# Fetch data (comment as needed)
-# Raw data
+# Server data (comment as needed)
+## Raw data ##
 # client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
-client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
-#client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
 # client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
-# Feature data
+
+## Feature data ##
 # client.subscribe("d/dev-sensing/4049712210/feature/ppg", 0)
 # lient.subscribe("d/dev-sensing/4049712210/feature/gsr", 0)
 # client.subscribe("d/dev-sensing/4049712210/feature/acc", 0)
