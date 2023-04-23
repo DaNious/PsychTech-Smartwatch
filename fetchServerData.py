@@ -7,25 +7,24 @@ import os
 import matplotlib.pyplot as plt
 
 from ServerMsg import ServerMsg
-from RawData3D import RawData3D
+from RawData import RawData
 
 HOST = '39.107.248.79'
 
 PORT = 1883
 
-rawAccData = RawData3D("Acc")
+rawData = RawData()
 
 # On_connect callback
 def on_connect(client, userdata, flags, rc):
     print('Connected with result code '+str(rc))
 # On_message callback
 def on_message(client, userdata, msg):
-    global dataCnt
     dataMsg = ServerMsg(msg.topic, msg.payload)
-    data = dataMsg.fetchData()
+    topic, data = dataMsg.fetchData()
     ## save to local variable(s) and plot ##
-    rawAccData.addData(dataMsg.data2float(data))
-    rawAccData.plotData()
+    rawData.addData(topic, dataMsg.data2float(data))
+    rawData.plotData()
     ## save to local file(s) ##
     currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
     if not os.path.exists("data/"+currentDateTime):
