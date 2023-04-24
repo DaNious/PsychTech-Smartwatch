@@ -14,6 +14,7 @@ class RawData:
         self.gyroY = []
         self.gyroZ = []
         plt.ion()
+        plt.figure(figsize=(20,10))
         plt.show()
 
     def addData(self, modal, incData):
@@ -35,12 +36,18 @@ class RawData:
             self.envData.extend(incData)
     
     def plotData(self):
-        plt.subplot(1, 2, 1)
+        plt.subplot(5, 1, 1)
         plt.plot(self.accX, c = 'r')
         plt.plot(self.accY, c = 'g')
         plt.plot(self.accZ, c = 'b')
-        plt.subplot(1, 2, 2)
+        plt.subplot(5, 1, 2)
         plt.plot(self.gyroX, c = 'r')
         plt.plot(self.gyroY, c = 'g')
         plt.plot(self.gyroZ, c = 'b')
+        plt.subplot(5, 1, 3)
+        plt.plot(self.ppgData, c = 'r')
+        plt.subplot(5, 1, 4)
+        plt.plot(self.gsrData, c = 'r')
+        plt.subplot(5, 1, 5)
+        plt.plot(self.envData, c = 'r')
         plt.pause(0.05)

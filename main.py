@@ -42,15 +42,15 @@ client.connect(HOST, PORT, 60)
 
 # Server data (comment as needed)
 ## Raw data ##
-# client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
 client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
 
 ## Feature data ##
 # client.subscribe("d/dev-sensing/4049712210/feature/ppg", 0)
-# lient.subscribe("d/dev-sensing/4049712210/feature/gsr", 0)
+# client.subscribe("d/dev-sensing/4049712210/feature/gsr", 0)
 # client.subscribe("d/dev-sensing/4049712210/feature/acc", 0)
 # client.subscribe("d/dev-sensing/4049712210/feature/gyro", 0)
 

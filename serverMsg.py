@@ -19,8 +19,7 @@ class ServerMsg:
     def saveData(self, dir, dataList):
         # file name is directory/sensing modality
         with open(dir+"/"+self.topic+"_data.csv", "a+") as file: 
-            for i in range(4):
-                print("Write data to file(s)"+"."*i)
+            print("Write "+ self.topic +" data to file(s)...")
             for data in dataList:
                 if data != "":
                     file.write(data+",\n")
