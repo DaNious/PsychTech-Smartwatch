@@ -5,34 +5,36 @@ with open("save.sav", "r") as saveFile:
     dataDir = saveFile.read()
 
 # Acc data
-accData = []
-with open(dataDir+"acc_data.csv", "r") as file:
-    for row in csv.reader(file):
-        accData.append(float(row[0]))
-accX = accData[0::3]
-accY = accData[1::3]
-accZ = accData[2::3]
+accX = []
+accY = []
+accZ = []
+with open(dataDir+"raw_acc.csv", "r") as file:
+    for col in csv.reader(file):
+        accX.append(float(col[1]))
+        accY.append(float(col[2]))
+        accZ.append(float(col[3]))
 
 # Gyro data
-gyroData = []
-with open(dataDir+"gyro_data.csv", "r") as file:
-    for row in csv.reader(file):
-        gyroData.append(float(row[0]))
-gyroX = gyroData[0::3]
-gyroY = gyroData[1::3]
-gyroZ = gyroData[2::3]
+gyroX = []
+gyroY = []
+gyroZ = []
+with open(dataDir+"raw_gyro.csv", "r") as file:
+    for col in csv.reader(file):
+        gyroX.append(float(col[1]))
+        gyroY.append(float(col[2]))
+        gyroZ.append(float(col[3]))
 
 # PPG data
 ppgData = []
-with open(dataDir+"ppg_data.csv", "r") as file:
-    for row in csv.reader(file):
-        ppgData.append(float(row[0]))
+with open(dataDir+"raw_ppg.csv", "r") as file:
+    for col in csv.reader(file):
+        ppgData.append(float(col[1]))
 
 # GSR data
 gsrData = []
-with open(dataDir+"gsr_data.csv", "r") as file:
-    for row in csv.reader(file):
-        gsrData.append(float(row[0]))
+with open(dataDir+"raw_gsr.csv", "r") as file:
+    for col in csv.reader(file):
+        gsrData.append(float(col[1]))
 
 fig = plt.figure(figsize=(20,10))
 sub1 = fig.add_subplot(411)

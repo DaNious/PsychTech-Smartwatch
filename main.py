@@ -25,12 +25,14 @@ def on_connect(client, userdata, flags, rc):
     print('Connected with result code '+str(rc))
 # On_message callback
 def on_message(client, userdata, msg):
-    dataMsg = ServerMsg(msg.topic, msg.payload)
-    topic, data = dataMsg.fetchData()
-    ## save to local variable(s) and plot ##
-    rawData.addData(topic, dataMsg.data2float(data))
+    serverMsg = ServerMsg(msg.topic, msg.payload)
+    topic, data, timeStamp = serverMsg.interpret()
+    if len(data) != 1 or data[0] != "":
+        ## save to local variable(s) and plot ##
+        rawData.addData(topic, serverMsg.data2float(data), int(timeStamp))
+        rawData.saveData("data/"+currentDateTime)
     # rawData.plotData()
-    dataMsg.saveData("data/"+currentDateTime, data)
+    # serverMsg.saveData("data/"+currentDateTime, data)
 
 client = mqtt.Client()
 
@@ -43,16 +45,16 @@ client.connect(HOST, PORT, 60)
 
 # Server data (comment as needed)
 ## Raw data ##
-# client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
-# client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
+client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
 
 ## Feature data ##
-# client.subscribe("d/dev-sensing/4049712210/feature/ppg", 0)
-# client.subscribe("d/dev-sensing/4049712210/feature/gsr", 0)
-# client.subscribe("d/dev-sensing/4049712210/feature/acc", 0)
-# client.subscribe("d/dev-sensing/4049712210/feature/gyro", 0)
+client.subscribe("d/dev-sensing/4049712210/feature/ppg", 0)
+client.subscribe("d/dev-sensing/4049712210/feature/gsr", 0)
+client.subscribe("d/dev-sensing/4049712210/feature/acc", 0)
+client.subscribe("d/dev-sensing/4049712210/feature/gyro", 0)
 
 client.loop_forever()

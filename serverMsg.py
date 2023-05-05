@@ -1,13 +1,17 @@
 class ServerMsg:
     def __init__(self, topic, payload):
-        self.topic = topic[topic.rfind("/")+1:]
+        self.SN = "4049712210"
+        self.topic = topic
+        # self.topic = topic[topic.rfind("/")+1:]
         self.payload = payload.decode("utf-8")
     
-    def fetchData(self):
-        # data are strings between every "[]"
-        dataStr = self.payload[self.payload.find("[")+1:self.payload.find("]")]
+    def interpret(self):
+        # find data with certain pattern
+        dataStr = self.payload[self.payload.find("\"data\":[")+8:self.payload.find("]")]
+        timeStampStr = self.payload[self.payload.find("\"timestamp\":")+12:self.payload.find("}")]
+        topicStr = self.topic[self.topic.find(self.SN)+len(self.SN)+1:]
         dataList = list(dataStr.split(","))
-        return self.topic, dataList
+        return topicStr.replace("/", "_"), dataList, timeStampStr
     
     def data2float(self, dataList):
         temp = []
