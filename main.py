@@ -15,6 +15,8 @@ PORT = 1883
 
 rawData = RawData()
 currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
+with open("save.sav", "w") as saveFile:
+    saveFile.write("data/"+currentDateTime+"/")
 if not os.path.exists("data/"+currentDateTime):
     os.makedirs("data/"+currentDateTime)
 
@@ -27,7 +29,7 @@ def on_message(client, userdata, msg):
     topic, data = dataMsg.fetchData()
     ## save to local variable(s) and plot ##
     rawData.addData(topic, dataMsg.data2float(data))
-    rawData.plotData()
+    # rawData.plotData()
     dataMsg.saveData("data/"+currentDateTime, data)
 
 client = mqtt.Client()
@@ -41,11 +43,11 @@ client.connect(HOST, PORT, 60)
 
 # Server data (comment as needed)
 ## Raw data ##
-client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
-client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
-client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
-client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
-client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/ppg", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/gsr", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/acc", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/gyro", 0)
+# client.subscribe("d/dev-sensing/4049712210/raw/env", 0)
 
 ## Feature data ##
 # client.subscribe("d/dev-sensing/4049712210/feature/ppg", 0)
