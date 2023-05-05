@@ -27,7 +27,7 @@ def on_message(client, userdata, msg):
     topic, data = dataMsg.fetchData()
     ## save to local variable(s) and plot ##
     rawData.addData(topic, dataMsg.data2float(data))
-    # rawData.plotData()
+    rawData.plotData()
     dataMsg.saveData("data/"+currentDateTime, data)
 
 client = mqtt.Client()
