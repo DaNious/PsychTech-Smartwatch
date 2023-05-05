@@ -14,6 +14,9 @@ HOST = '39.107.248.79'
 PORT = 1883
 
 rawData = RawData()
+currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
+if not os.path.exists("data/"+currentDateTime):
+    os.makedirs("data/"+currentDateTime)
 
 # On_connect callback
 def on_connect(client, userdata, flags, rc):
@@ -24,11 +27,7 @@ def on_message(client, userdata, msg):
     topic, data = dataMsg.fetchData()
     ## save to local variable(s) and plot ##
     rawData.addData(topic, dataMsg.data2float(data))
-    rawData.plotData()
-    ## save to local file(s) ##
-    currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
-    if not os.path.exists("data/"+currentDateTime):
-        os.makedirs("data/"+currentDateTime)
+    # rawData.plotData()
     dataMsg.saveData("data/"+currentDateTime, data)
 
 client = mqtt.Client()

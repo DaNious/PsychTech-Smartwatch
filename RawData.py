@@ -13,8 +13,19 @@ class RawData:
         self.gyroX = []
         self.gyroY = []
         self.gyroZ = []
+        fig = plt.figure(figsize=(20,10))
+        sub1 = fig.add_subplot(511)
+        sub2 = fig.add_subplot(512)
+        sub3 = fig.add_subplot(513)
+        sub4 = fig.add_subplot(514)
+        sub5 = fig.add_subplot(515)
+        fig.tight_layout()
+        sub1.title.set_text("Acc")
+        sub2.title.set_text("Gyro")
+        sub3.title.set_text("PPG")
+        sub4.title.set_text("GSR")
+        sub5.title.set_text("Env")
         plt.ion()
-        plt.figure(figsize=(20,10))
         plt.show()
 
     def addData(self, modal, incData):
