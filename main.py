@@ -8,12 +8,14 @@ import matplotlib.pyplot as plt
 
 from ServerMsg import ServerMsg
 from RawData import RawData
+from FeatureData import FeatureData
 
 HOST = '39.107.248.79'
 
 PORT = 1883
 
 rawData = RawData()
+featureData = FeatureData()
 currentDateTime = datetime.now().strftime("%Y%m%d_%H_%M")
 with open("save.sav", "w") as saveFile:
     saveFile.write("data/"+currentDateTime+"/")
@@ -27,10 +29,14 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     serverMsg = ServerMsg(msg.topic, msg.payload)
     topic, data, timeStamp = serverMsg.interpret()
-    if len(data) != 1 or data[0] != "":
-        ## save to local variable(s) and plot ##
-        rawData.addData(topic, serverMsg.data2float(data), int(timeStamp))
-        rawData.saveData("data/"+currentDateTime)
+    if data[0] != "":
+        if topic[0] == "f": # feature data
+            featureData.addFeature(topic, serverMsg.data2float(data), int(timeStamp))
+            featureData.saveFeature("data/"+currentDateTime)
+        else:   # raw data
+            ## save to local variable(s) and plot ##
+            rawData.addData(topic, serverMsg.data2float(data), int(timeStamp))
+            rawData.saveData("data/"+currentDateTime)
     # rawData.plotData()
     # serverMsg.saveData("data/"+currentDateTime, data)
 
