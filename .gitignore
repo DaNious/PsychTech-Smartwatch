@@ -6,7 +6,8 @@ __pycache__/
 *.csv
 
 # no data folder
-data/
+*/data
+*/downloads
 
 # no .sav file
 *.sav

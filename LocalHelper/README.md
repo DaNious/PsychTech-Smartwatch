@@ -7,3 +7,10 @@ This is a program used to fetch data recorded by PsychTech smartwatches from its
 4. Hit "开始采集" on the assistant to start data collection.
 5. When you want to stop the data collection, press Ctrl + C on your desktop to terminate the program.
 6. The data is by default saved to the "/data" folder and you could run dataDisplay.py to check the data of last experiment.
+
+# PsychTech Smartwatch Server Data Analyzer
+This is to analyze the data downloaded from the cloud server of PsychTech.  
+
+> Cloud server website: https://2in1.psychtech.cn/mgr/index.html
+
+P.S. You must login with your ***account*** and ***password***.
