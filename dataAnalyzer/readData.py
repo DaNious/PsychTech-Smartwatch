@@ -12,7 +12,8 @@ import neurokit2 as nk
 
 # %% Read raw data
 fs = 4 # sampling rate
-dropSeg = 80 # drop certain length of data at the beginning
+dropSec = 20 # drop certain length of data at the beginning
+dropSeg = dropSec*fs
 filename = askopenfilename(initialdir=os.getcwd()+'/downloads')
 df = pd.read_csv(filename)
 data = df['data'].dropna().to_numpy()

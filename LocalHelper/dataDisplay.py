@@ -96,13 +96,13 @@ gsrFeature = df.iloc[:,1:].T.values.tolist()
 
 ## Plot ##
 # plot acc data
-fig = plt.figure()
-plt.plot(np.linspace(0, len(accX)/20, num=len(accX)), accX, c = 'r', label="accX")
-plt.plot(np.linspace(0, len(accY)/20, num=len(accY)), accY, c = 'g', label="accY")
-plt.plot(np.linspace(0, len(accZ)/20, num=len(accZ)), accZ, c = 'b', label="accZ")
-plt.legend(loc="lower right")
-plt.title("Accelerometer Readings")
-plt.xlabel("Time(s)")
+# fig = plt.figure()
+# plt.plot(np.linspace(0, len(accX)/20, num=len(accX)), accX, c = 'r', label="accX")
+# plt.plot(np.linspace(0, len(accY)/20, num=len(accY)), accY, c = 'g', label="accY")
+# plt.plot(np.linspace(0, len(accZ)/20, num=len(accZ)), accZ, c = 'b', label="accZ")
+# plt.legend(loc="lower right")
+# plt.title("Accelerometer Readings")
+# plt.xlabel("Time(s)")
 
 # plot ppg and gsr data
 fig = plt.figure(figsize=(20,10))
