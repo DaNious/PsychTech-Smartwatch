@@ -6,8 +6,16 @@ __pycache__/
 *.csv
 
 # no data folder
-*/data
-*/downloads
+data
+downloads
+404971221000
 
 # no .sav file
 *.sav
+
+# no adb key
+*/adbkey
+*/adbkey.*
+
+# no test file
+test.py
