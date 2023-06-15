@@ -13,7 +13,7 @@ This is a program used to fetch the .csv file recorded by PsychTech smartwatches
 
 ## How to use?
 1. Download "Android SDK Platform Tools" (https://developer.android.com/tools/releases/platform-tools) and then add "adb.exe" to your PATH.
-2. Connect the assistant to the desktop through USB and turn on "USB debugging" on the assistant side (https://developer.android.com/studio/debug/dev-options).
+2. Connect the assistant to the desktop through USB and turn on "USB debugging" on the assistant side (https://developer.android.com/studio/debug/dev-options). Then, start the adb daemon by issuing command window "adb start-server" on your desktop. 
 3. Make sure that the assistant and smartwatch are connected through Bluetooth.
 4. Wear the smartwatch tightly.
 5. Edit /adbHelper/main.py to choose which "SENSOR" data you would like to display, and then run the /adbHelper/main.py (optional: comment out "Copy the data out" code section to copy .csv files out)
